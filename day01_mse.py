@@ -7,7 +7,7 @@ def mean_squared_error(actual, predicted):
         return None
 
     summation = 0
-    for i, tup in enumerate(list(zip(actual, predicted))):
+    for tup in zip(actual, predicted):
         summation += (tup[0] - tup[1])**2
     mse_final = summation/len(actual)
     return mse_final
