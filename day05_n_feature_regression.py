@@ -44,7 +44,7 @@ X = [
     [5, 2, 4],
     [6, 4, 3]
 ]
-Y = [9, 12, 12, 17, 25, 26]
+Y = [9, 12, 15, 21, 22, 29]
 LR = 0.01
 EPOCHS = 10_000
 WTS, BIAS = train_linear_regression(X,Y,LR,EPOCHS)
