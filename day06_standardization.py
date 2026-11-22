@@ -8,7 +8,7 @@ def standardize_features(x):
     if len(x) == 0:
         return None
     num_vars = len(x[0])
-    if num_vars == 0 or any(i != num_vars for i in x):
+    if num_vars == 0 or any(len(i) != num_vars for i in x):
         return None
     # Get Means
     means = [0.0] * num_vars
