@@ -23,14 +23,14 @@ def standardize_features(x):
         for k in range(num_vars):
             stds[k] += (x_val[k] - means[k]) ** 2
     stds = [(i/(len(x))) ** 0.5 for i in stds]
-    # Validate Standard Deviation
-    if any(i==0 for i in stds):
-        return None
     # Z Score Normalization
     for x_val in x:
         x_scaled_val = [0.0] * num_vars
         for k in range(num_vars):
-            x_scaled_val[k] = (x_val[k] - means[k]) / stds[k]
+            if stds[k] != 0:
+                x_scaled_val[k] = (x_val[k] - means[k]) / stds[k]
+            else:
+                x_scaled_val[k] = 0.0
         x_scaled.append(x_scaled_val)
     return x_scaled, means, stds
 
