@@ -8,7 +8,7 @@ def standardize_features(x):
     if len(x) == 0:
         return None
     num_vars = len(x[0])
-    if num_vars == 0 or len([i for i in x if len(i) != num_vars]) > 0:
+    if num_vars == 0 or any(i != num_vars for i in x):
         return None
     # Get Means
     means = [0.0] * num_vars
@@ -23,12 +23,14 @@ def standardize_features(x):
         for k in range(num_vars):
             stds[k] += (x_val[k] - means[k]) ** 2
     stds = [(i/(len(x))) ** 0.5 for i in stds]
+    # Validate Standard Deviation
+    if any(i==0 for i in stds):
+        return None
     # Z Score Normalization
     for x_val in x:
         x_scaled_val = [0.0] * num_vars
         for k in range(num_vars):
             x_scaled_val[k] = (x_val[k] - means[k]) / stds[k]
-        print ('Adding x_scaled_val ', x_scaled_val)
         x_scaled.append(x_scaled_val)
     return x_scaled, means, stds
 
