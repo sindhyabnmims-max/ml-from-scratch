@@ -8,12 +8,12 @@ def train_test_split(x, y, test_size=0.2, seed=42):
         or test_size <= 0 or test_size >= 1 or seed <= 0:
         return None
     num_rows = len(x[0])
-    if num_rows == 0 or any(i for i in x if len(i) != num_rows):
+    if num_rows == 0 or any(len(i) != num_rows for i in x):
         return None
     # Generate random set of indices
     n_test = round(test_size * len(x))
     random.seed(seed)
-    test_indices = random.sample(range(1,len(x)), n_test)
+    test_indices = random.sample(range(len(x)), n_test)
     x_train = [x[i] for i in range(len(x)) if i not in test_indices]
     y_train = [y[i] for i in range(len(y)) if i not in test_indices]
     x_test = [x[i] for i in test_indices]
